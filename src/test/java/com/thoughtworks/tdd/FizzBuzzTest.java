@@ -1,7 +1,12 @@
 package com.thoughtworks.tdd;
 
-import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FizzBuzzTest {
     @Test
@@ -14,7 +19,12 @@ public class FizzBuzzTest {
         String result = fizzBuzz.fizzBuzz(number);
 
         //then
-        Assertions.assertEquals("1", result);
+        assertEquals("1", result);
+//        assertThat(result,is("1"));
+//        assertAll("input_number_return_number",
+//                ()->assertEquals("1", fizzBuzz.fizzBuzz(1)),
+//                ()->assertEquals("2", fizzBuzz.fizzBuzz(2)));
+
 
     }
 
@@ -25,7 +35,7 @@ public class FizzBuzzTest {
 
         String result=fizzBuzz.fizzBuzz(number);
 
-        Assertions.assertEquals("Fizz",result);
+        assertEquals("Fizz",result);
     }
 
     @Test
@@ -35,7 +45,7 @@ public class FizzBuzzTest {
 
         String result=fizzBuzz.fizzBuzz(number);
 
-        Assertions.assertEquals("Fizz",result);
+        assertEquals("Fizz",result);
     }
 
     @Test
@@ -45,7 +55,7 @@ public class FizzBuzzTest {
 
         String result=fizzBuzz.fizzBuzz(number);
 
-        Assertions.assertEquals("Buzz",result);
+        assertEquals("Buzz",result);
     }
 
     @Test
@@ -55,7 +65,7 @@ public class FizzBuzzTest {
 
         String result=fizzBuzz.fizzBuzz(number);
 
-        Assertions.assertEquals("Buzz",result);
+        assertEquals("Buzz",result);
     }
 
     @Test
@@ -65,7 +75,7 @@ public class FizzBuzzTest {
 
         String result=fizzBuzz.fizzBuzz(number);
 
-        Assertions.assertEquals("Whizz",result);
+        assertEquals("Whizz",result);
     }
 
     @Test
@@ -75,7 +85,7 @@ public class FizzBuzzTest {
 
         String result=fizzBuzz.fizzBuzz(number);
 
-        Assertions.assertEquals("FizzBuzz",result);
+        assertEquals("FizzBuzz",result);
     }
 
     @Test
@@ -85,7 +95,7 @@ public class FizzBuzzTest {
 
         String result=fizzBuzz.fizzBuzz(number);
 
-        Assertions.assertEquals("FizzWhizz",result);
+        assertEquals("FizzWhizz",result);
     }
 
     @Test
@@ -95,7 +105,7 @@ public class FizzBuzzTest {
 
         String result=fizzBuzz.fizzBuzz(number);
 
-        Assertions.assertEquals("BuzzWhizz",result);
+        assertEquals("Fizz",result);
     }
 
     @Test
@@ -105,6 +115,27 @@ public class FizzBuzzTest {
 
         String result=fizzBuzz.fizzBuzz(number);
 
-        Assertions.assertEquals("FizzBuzzWhizz",result);
+        assertEquals("FizzBuzzWhizz",result);
     }
+
+    @Test
+    public void should_return_Fizz_when_call_fizzBuzz_input_13(){
+        int number=13;
+        FizzBuzz fizzBuzz=new FizzBuzz();
+
+        String result=fizzBuzz.fizzBuzz(number);
+
+        assertEquals("Fizz",result);
+    }
+
+    @Test
+    public void should_return_Fizz_when_call_fizzBuzz_input_37(){
+        int number=37;
+        FizzBuzz fizzBuzz=new FizzBuzz();
+
+        String result=fizzBuzz.fizzBuzz(number);
+
+        assertEquals("Fizz",result);
+    }
+
 }
