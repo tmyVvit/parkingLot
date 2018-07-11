@@ -77,6 +77,21 @@ public class ParkingLotTest {
         assertEquals(3, result);
     }
 
+    @Test
+    public void should_park_success_when_a_full_parking_lot_unParked(){
+        ParkingLot parkingLot = new ParkingLot(2);
+        Car car1 = new Car(1);
+        Car car2 = new Car(2);
+        Car car3 = new Car(3);
+        Note note1 = parkingLot.parking(car1);
+        parkingLot.parking(car2);
 
+        parkingLot.carGo(note1);
+        try{
+            parkingLot.parking(car3);
+        }catch (ParkingLotFullException parkingLotFullException){
+            fail("it should park successful");
+        }
+    }
 
 }
