@@ -3,6 +3,7 @@ package com.thoughtworks.tdd;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParkingLotTest {
     @Test
@@ -12,9 +13,29 @@ public class ParkingLotTest {
         Car car1 = new Car(1);
         Note note1 = new Note(1);
         //when
-        Note result = parkingLot.parking(car1);
-        //then
-        assertEquals(note1, result);
+        try {
+            Note result = parkingLot.parking(car1);
+        }catch (ParkingLotFullException parkingLotFullExcetion){
+            fail("you can't park car when parking lot is full");
+        }
+        //then//        assertEquals(note1, result);
+    }
+
+    @Test
+    public void should_throw_ParkingLotFullException_when_call_parking_given_parking_lot_is_full(){
+        ParkingLot parkingLot = new ParkingLot(2);
+        Car car1 = new Car(1);
+        Car car2 = new Car(2);
+        Car car3 = new Car(3);
+        parkingLot.parking(car1);
+        parkingLot.parking(car2);
+
+        try{
+            parkingLot.parking(car3);
+            fail("it should throw exception when parking lot is full");
+        }catch (ParkingLotFullException parkingLotFullException){
+        }
+//        assertEquals(null, result);
     }
 
     @Test
@@ -41,19 +62,6 @@ public class ParkingLotTest {
         assertEquals(null, result);
     }
 
-    @Test
-    public void should_return_null_when_pakinglot_is_full_call_paking(){
-        ParkingLot parkingLot = new ParkingLot(2);
-        Car car1 = new Car(1);
-        Car car2 = new Car(2);
-        Car car3 = new Car(3);
-        parkingLot.parking(car1);
-        parkingLot.parking(car2);
-
-        Note result = parkingLot.parking(car3);
-
-        assertEquals(null, result);
-    }
 
     @Test
     public void should_return_emptysize_when_call_left(){
@@ -68,5 +76,7 @@ public class ParkingLotTest {
 
         assertEquals(3, result);
     }
+
+
 
 }

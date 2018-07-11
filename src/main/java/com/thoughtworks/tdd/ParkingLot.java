@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 public class ParkingLot {
     private int size;
+
+//    private HashMap<Locate, Car> parkingSpace
     private HashMap<Note, Car> parkingCars = new HashMap<>();
 
     public ParkingLot(int _size) {
@@ -13,24 +15,28 @@ public class ParkingLot {
     public boolean isFull(){
         return parkingCars.size()>=size;
     }
+    public int left() {
+        return size-parkingCars.size();
+    }
 
-    public Note parking(Car car){
+    public Note parking(Car car) throws ParkingLotFullException{
         if(!isFull()){
             Note note = new Note(car.getCarid());
             parkingCars.put(note, car);
             return note;
         }
-        else return null;
+        else {
+            throw new ParkingLotFullException();
+//            return null;
+        }
     }
 
     public Car carGo(Note note) {
 //        if(parkingCars.containsKey(note))
 //            return parkingCars.get(note);
 //        else return null;
-        return parkingCars.getOrDefault(note, null);
+        return parkingCars.remove(note);
     }
 
-    public int left() {
-        return size-parkingCars.size();
-    }
+
 }
