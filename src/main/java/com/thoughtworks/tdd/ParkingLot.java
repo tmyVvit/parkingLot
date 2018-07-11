@@ -16,10 +16,10 @@ public class ParkingLot {
         return parkingCars.size()>=size;
     }
     public int left() {
-        return size-parkingCars.size();
+        return size - parkingCars.size();
     }
 
-    public Note parking(Car car) throws ParkingLotFullException{
+    public Note parking(Car car){
         if(!isFull()){
             Note note = new Note(car.getCarid());
             parkingCars.put(note, car);
@@ -31,7 +31,7 @@ public class ParkingLot {
         }
     }
 
-    public Car carGo(Note note) {
+    public Car unPark(Note note) {
 //        if(parkingCars.containsKey(note))
 //            return parkingCars.get(note);
 //        else return null;
