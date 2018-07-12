@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class ParkingBoyTest {
     @Test
@@ -28,9 +29,10 @@ public class ParkingBoyTest {
     @Test
     public void should_park_failed_when_call_boyPark_given_one_parking_lot_is_full(){
         ParkingBoy parkingBoy = new ParkingBoy();
-        parkingBoy.addParkingLot(new ParkingLot(1));
+        ParkingLot parkingLot = mock(ParkingLot.class);
+        parkingBoy.addParkingLot(parkingLot);
         parkingBoy.boyPark(new Car(1));
-
+        when(parkingLot.isFull()).thenReturn(true);
 
         try {
             parkingBoy.boyPark(new Car(2));
