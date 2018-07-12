@@ -61,9 +61,12 @@ public class ParkingBoyTest {
     @Test
     public void should_get_the_car_when_call_boyUnPack_given_parkingBoy_has_a_parking_lot_with_a_car_parked_input_note_correct(){
         ParkingBoy parkingBoy = new ParkingBoy();
-        parkingBoy.addParkingLot(new ParkingLot(1));
+        ParkingLot parkingLot = mock(ParkingLot.class);
+        parkingBoy.addParkingLot(parkingLot);
+
         Car car = new Car(1);
         Note note = parkingBoy.boyPark(car);
+        when(parkingLot.unPark(note)).thenReturn(car);
 
         assertEquals(car, parkingBoy.boyUnPark(note));
     }
