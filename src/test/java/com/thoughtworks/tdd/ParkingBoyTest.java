@@ -21,7 +21,7 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_park_failed_when_call_boyPark_given_all_parking_log_is_full(){
+    public void should_park_failed_when_call_boyPark_given_all_parking_lot_is_full(){
         ParkingBoy parkingBoy = new ParkingBoy();
         parkingBoy.addParkingLog(new ParkingLot(1));
         parkingBoy.boyPark(new Car(1));
@@ -65,6 +65,10 @@ public class ParkingBoyTest {
         Car car = new Car(1);
         parkingBoy.boyPark(car);
 
-        assertNotEquals(car, parkingBoy.boyUnPark(new Note(1)));
+        try {
+            parkingBoy.boyUnPark(new Note(1));
+            fail("should throw the CannotFindTheCarException");
+        }catch (CannotFindTheCarException cannotFindTheCarException){
+        }
     }
 }

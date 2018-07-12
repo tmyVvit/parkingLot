@@ -14,6 +14,7 @@ public class NoteTest {
         int result = note.getNo();
 
         assertEquals(1, result);
+        assertEquals(note, new Note(1));
     }
 
     @Test

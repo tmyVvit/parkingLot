@@ -13,7 +13,7 @@ public class ParkingBoy {
         parkingLots.add(parkingLot);
     }
 
-    public ParkingLot getTheParkingLot(){
+    public ParkingLot getTheFirstNotFullParkingLot(){
         for (ParkingLot parkingLot: parkingLots) {
             if(!parkingLot.isFull()){
                 return parkingLot;
@@ -23,7 +23,7 @@ public class ParkingBoy {
     }
 
     public Note boyPark(Car car) {
-        ParkingLot parkingLot = getTheParkingLot();
+        ParkingLot parkingLot = getTheFirstNotFullParkingLot();
         if(parkingLot != null){
             Note note = parkingLot.parking(car);
            //note.setParkingLot(parkingLot);
@@ -47,6 +47,9 @@ public class ParkingBoy {
             if(car != null){
                 break;
             }
+        }
+        if(car == null){
+            throw new CannotFindTheCarException();
         }
         return car;
     }
