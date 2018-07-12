@@ -9,7 +9,7 @@ public class ParkingBoy {
     public ParkingBoy(){}
 
 
-    public void addParkingLog(ParkingLot parkingLot) {
+    public void addParkingLot(ParkingLot parkingLot) {
         parkingLots.add(parkingLot);
     }
 
