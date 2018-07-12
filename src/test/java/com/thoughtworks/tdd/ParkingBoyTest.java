@@ -3,7 +3,6 @@ package com.thoughtworks.tdd;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -81,9 +80,12 @@ public class ParkingBoyTest {
         ParkingLot parkingLot = mock(ParkingLot.class);
         parkingBoy.addParkingLot(parkingLot);
         Car car = new Car(1);
-        Note note = parkingBoy.boyPark(car);
+        Note note = new Note(1);
+        when(parkingLot.parking(car)).thenReturn(note);
+        when(parkingLot.unPark(note)).thenReturn(car);
+        note = parkingBoy.boyPark(car);
         parkingBoy.boyUnPark(note);
-
+        when(parkingLot.unPark(note)).thenReturn(null);
         try {
             parkingBoy.boyUnPark(note);
             fail("should throw the CannotFindTheCarException");
