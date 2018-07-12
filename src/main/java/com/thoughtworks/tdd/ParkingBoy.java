@@ -27,6 +27,7 @@ public class ParkingBoy {
         if(parkingLot != null){
             return parkingLot.parking(car);
         }
-        throw new ParkingLotFullException();
+        throw new AllParkingLotFullException();
+        //return null;
     }
 }
