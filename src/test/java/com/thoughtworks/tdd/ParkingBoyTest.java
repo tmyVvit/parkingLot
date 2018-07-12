@@ -44,15 +44,18 @@ public class ParkingBoyTest {
     @Test
     public void should_park_to_second_parking_lot_when_call_boyPark_given_first_parking_lot_is_full(){
         ParkingBoy parkingBoy = new ParkingBoy();
-        ParkingLot secondParkingLot = new ParkingLot(1);
-        parkingBoy.addParkingLot(new ParkingLot(0));
+        ParkingLot secondParkingLot = mock(ParkingLot.class);
+        ParkingLot firstParkingLot = mock(ParkingLot.class);
+        parkingBoy.addParkingLot(firstParkingLot);
         parkingBoy.addParkingLot(secondParkingLot);
+        when(firstParkingLot.isFull()).thenReturn(true);
+        when(secondParkingLot.isFull()).thenReturn(false);
 
-        Note result = parkingBoy.boyPark(new Car(1));
+        Car car = new Car(1);
+        parkingBoy.boyPark(car);
 
-        Note expect = new Note(1);
+        verify(secondParkingLot).parking(car);
 
-        assertEquals(expect, result);
     }
     
     @Test
