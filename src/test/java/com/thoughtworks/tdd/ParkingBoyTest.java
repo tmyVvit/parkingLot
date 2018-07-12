@@ -63,18 +63,23 @@ public class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy();
         ParkingLot parkingLot = mock(ParkingLot.class);
         parkingBoy.addParkingLot(parkingLot);
-
         Car car = new Car(1);
-        Note note = parkingBoy.boyPark(car);
+        Note note = new Note(1);
+
+        when(parkingLot.parking(car)).thenReturn(note);
         when(parkingLot.unPark(note)).thenReturn(car);
 
-        assertEquals(car, parkingBoy.boyUnPark(note));
+        Note note1 = parkingBoy.boyPark(car);
+
+
+        assertEquals(car, parkingBoy.boyUnPark(note1));
     }
 
     @Test
     public void should_not_get_the_car_when_call_boyUnPack_given_parkingBoy_has_a_parking_lot_with_cars_parked_input_note_wrong(){
         ParkingBoy parkingBoy = new ParkingBoy();
-        parkingBoy.addParkingLot(new ParkingLot(1));
+        ParkingLot parkingLot = mock(ParkingLot.class);
+        parkingBoy.addParkingLot(parkingLot);
         Car car = new Car(1);
         Note note = parkingBoy.boyPark(car);
         parkingBoy.boyUnPark(note);
