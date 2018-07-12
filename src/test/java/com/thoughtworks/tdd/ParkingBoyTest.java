@@ -2,6 +2,7 @@ package com.thoughtworks.tdd;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParkingBoyTest {
@@ -34,6 +35,16 @@ public class ParkingBoyTest {
 
     @Test
     public void should_park_to_second_parking_lot_when_call_boyPark_given_first_parking_lot_is_full(){
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot secondParkingLot = new ParkingLot(1);
+        parkingBoy.addParkingLog(new ParkingLot(0));
+        parkingBoy.addParkingLog(secondParkingLot);
+
+        Note result = parkingBoy.boyPark(new Car(1));
+
+        Note expect = new Note(1, secondParkingLot);
+
+        assertEquals(expect, result);
 
     }
 
