@@ -25,9 +25,16 @@ public class ParkingBoy {
     public Note boyPark(Car car) {
         ParkingLot parkingLot = getTheParkingLot();
         if(parkingLot != null){
-            return parkingLot.parking(car);
+            Note note = parkingLot.parking(car);
+            note.setParkingLot(parkingLot);
+            return note;
         }
-        throw new AllParkingLotFullException();
+        else throw new AllParkingLotFullException();
         //return null;
+    }
+
+    public Car boyUnPark(Note note) {
+        ParkingLot parkingLot = note.getParkingLot();
+        return parkingLot.unPark(note);
     }
 }

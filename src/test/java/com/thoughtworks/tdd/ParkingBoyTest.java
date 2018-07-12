@@ -45,6 +45,16 @@ public class ParkingBoyTest {
         Note expect = new Note(1, secondParkingLot);
 
         assertEquals(expect, result);
+    }
+    
+    @Test
+    public void should_unPark_successful_when_call_boyUnPack_given_parkingBoy_has_a_parking_lot_with_a_car_parked(){
+        ParkingBoy parkingBoy = new ParkingBoy();
+        parkingBoy.addParkingLog(new ParkingLot(1));
+        Car car = new Car(1);
+        Note note = parkingBoy.boyPark(car);
+
+        assertEquals(car, parkingBoy.boyUnPark(note));
 
     }
 

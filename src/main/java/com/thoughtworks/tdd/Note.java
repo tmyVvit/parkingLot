@@ -23,4 +23,12 @@ public class Note {
         }
         return super.equals(obj);
     }
+
+    public ParkingLot getParkingLot() {
+        return parkingLot;
+    }
+
+    public void setParkingLot(ParkingLot _parkingLot) {
+        parkingLot = _parkingLot;
+    }
 }
