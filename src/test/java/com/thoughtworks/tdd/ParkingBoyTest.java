@@ -3,6 +3,7 @@ package com.thoughtworks.tdd;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParkingBoyTest {
@@ -48,14 +49,22 @@ public class ParkingBoyTest {
     }
     
     @Test
-    public void should_unPark_successful_when_call_boyUnPack_given_parkingBoy_has_a_parking_lot_with_a_car_parked(){
+    public void should_get_the_car_when_call_boyUnPack_given_parkingBoy_has_a_parking_lot_with_a_car_parked_input_note_correct(){
         ParkingBoy parkingBoy = new ParkingBoy();
         parkingBoy.addParkingLog(new ParkingLot(1));
         Car car = new Car(1);
         Note note = parkingBoy.boyPark(car);
 
         assertEquals(car, parkingBoy.boyUnPark(note));
-
     }
 
+    @Test
+    public void should_not_get_the_car_when_call_boyUnPack_given_parkingBoy_has_a_parking_lot_with_cars_parked_input_note_wrong(){
+        ParkingBoy parkingBoy = new ParkingBoy();
+        parkingBoy.addParkingLog(new ParkingLot(1));
+        Car car = new Car(1);
+        Note note = parkingBoy.boyPark(car);
+
+        assertNotEquals(car, parkingBoy.boyUnPark(new Note(1)));
+    }
 }

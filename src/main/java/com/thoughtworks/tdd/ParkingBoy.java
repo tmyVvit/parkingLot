@@ -35,6 +35,8 @@ public class ParkingBoy {
 
     public Car boyUnPark(Note note) {
         ParkingLot parkingLot = note.getParkingLot();
-        return parkingLot.unPark(note);
+        if(parkingLot != null)
+            return parkingLot.unPark(note);
+        return null;
     }
 }
