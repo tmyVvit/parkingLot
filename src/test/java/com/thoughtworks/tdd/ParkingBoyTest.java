@@ -43,7 +43,7 @@ public class ParkingBoyTest {
 
         Note result = parkingBoy.boyPark(new Car(1));
 
-        Note expect = new Note(1, secondParkingLot);
+        Note expect = new Note(1);
 
         assertEquals(expect, result);
     }
@@ -63,7 +63,7 @@ public class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy();
         parkingBoy.addParkingLog(new ParkingLot(1));
         Car car = new Car(1);
-        Note note = parkingBoy.boyPark(car);
+        parkingBoy.boyPark(car);
 
         assertNotEquals(car, parkingBoy.boyUnPark(new Note(1)));
     }

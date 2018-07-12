@@ -26,17 +26,28 @@ public class ParkingBoy {
         ParkingLot parkingLot = getTheParkingLot();
         if(parkingLot != null){
             Note note = parkingLot.parking(car);
-            note.setParkingLot(parkingLot);
+           //note.setParkingLot(parkingLot);
             return note;
         }
         else throw new AllParkingLotFullException();
         //return null;
     }
 
+//    public Car boyUnParkOld(Note note) {
+//        ParkingLot parkingLot = note.getParkingLot();
+//        if(parkingLot != null)
+//            return parkingLot.unPark(note);
+//        return null;
+//    }
+
     public Car boyUnPark(Note note) {
-        ParkingLot parkingLot = note.getParkingLot();
-        if(parkingLot != null)
-            return parkingLot.unPark(note);
-        return null;
+        Car car = null;
+        for(ParkingLot parkingLot: parkingLots){
+            car = parkingLot.unPark(note);
+            if(car != null){
+                break;
+            }
+        }
+        return car;
     }
 }
