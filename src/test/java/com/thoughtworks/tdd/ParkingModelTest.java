@@ -52,4 +52,19 @@ public class ParkingModelTest {
         }catch (AllParkingLotFullException allParkingLotFullException){
         }
     }
+    
+    @Test
+    public void should_return_car_when_call_unPark_given_valid_ticket(){
+    // given
+        ParkingBoy parkingBoy = mock(ParkingBoy.class);
+        ParkingModel parkingModel = new ParkingModel(parkingBoy);
+        Ticket ticket = mock(Ticket.class);
+        when(ticket.getUUID()).thenReturn("test-uuid");
+    // when// then
+        try{
+            parkingModel.unPark(ticket);
+        } catch (CannotFindTheCarException cannotFindTheCarException){
+            fail("should get the car instead of throw exception");
+        }
+    }
 }

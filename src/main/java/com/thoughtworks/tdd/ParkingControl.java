@@ -24,6 +24,8 @@ public class ParkingControl {
     }
 
     private void unpark() {
+        Ticket ticket = parkingView.unPark();
+        parkingModel.unPark(ticket);
     }
 
     public void park(){

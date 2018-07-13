@@ -16,15 +16,14 @@ public class ParkingModel {
     }
 
     public Ticket park(Car car){
-        try{
-            Ticket ticket = parkingBoy.boyPark(car);
-            return ticket;
-        }catch (AllParkingLotFullException allParkingLotFullException){
-            throw allParkingLotFullException;
-        }
+        return parkingBoy.boyPark(car);
     }
 
     public boolean notFull() {
         return !parkingBoy.isAllFull();
+    }
+
+    public Car unPark(Ticket ticket) {
+        return parkingBoy.boyUnPark(ticket);
     }
 }

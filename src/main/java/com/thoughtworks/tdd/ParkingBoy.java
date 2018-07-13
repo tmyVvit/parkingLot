@@ -35,9 +35,8 @@ public class ParkingBoy{
     public Ticket boyPark(Car car) {
         ParkingLot parkingLot = getTheFirstNotFullParkingLot();
         if(parkingLot != null){
-            Ticket ticket = parkingLot.parking(car);
-           //ticket.setParkingLot(parkingLot);
-            return ticket;
+            //ticket.setParkingLot(parkingLot);
+            return parkingLot.parking(car);
         }
         else throw new AllParkingLotFullException();
         //return null;

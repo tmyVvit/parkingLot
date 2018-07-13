@@ -8,6 +8,9 @@ public class Ticket {
     public Ticket(){
         uuid = UUID.randomUUID();
     }
+    public Ticket(String uuidString){
+        uuid = UUID.fromString(uuidString);
+    }
 
     public String getUUID(){
         return uuid.toString();

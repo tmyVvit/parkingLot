@@ -18,8 +18,7 @@ public class ParkingView {
     public int start(){
         showMainUI();
         try{
-           int commandNumber = getCommandNumber();
-           return commandNumber;
+            return getCommandNumber();
         }catch (InputNotValidException inputNotValidException){
             printInputErr();
             throw inputNotValidException;
@@ -59,9 +58,10 @@ public class ParkingView {
         System.out.print(ticket.getUUID());
     }
 
-    public String unPark() {
+    public Ticket unPark() {
         System.out.print("请输入小票编号：");
-        return getInput.get();
+
+        return new Ticket(getInput.get());
     }
 
     public void unParkSuccess(Car car) {
