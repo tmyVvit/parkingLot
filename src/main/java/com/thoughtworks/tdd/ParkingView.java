@@ -1,17 +1,25 @@
 package com.thoughtworks.tdd;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 public class ParkingView {
+    private GetInput getInput;
+    //private
+    private final String PARK = "1";
+    private final String UNPARK = "2";
+    private final int PARKCOMMAND = 1;
+    private final int UNPARKCOMMAND = 2;
+
+
+    public ParkingView(GetInput _getInput) {
+        getInput = _getInput;
+    }
 
     public void start(){
         showMainUI();
         int commandNumber = 0;
         try{
             commandNumber = getCommandNumber();
-        }catch (InputNotNumberException inputNotNumberException){
-            System.out.print("非法指令，请查证后再输\n");
+        }catch (InputNotValidException inputNotValidException){
+            printInputErr();
             start();
         }
         doNext(commandNumber);
@@ -22,19 +30,21 @@ public class ParkingView {
     }
 
     public int getCommandNumber() {
-        Scanner sc = new Scanner(System.in);
-        int command;
-        try {
-            command = sc.nextInt();
-        }catch (InputMismatchException inputMismatchException){
-            throw new InputNotNumberException();
+        String input = getInput.get();
+        if(input.equals(PARK)){
+            return PARKCOMMAND;
+        } else if(input.equals(UNPARK)){
+            return UNPARKCOMMAND;
+        } else {
+            throw new InputNotValidException();
         }
-        if(command != 1 && command != 2)
-            throw new InputNotNumberException();
-        return command;
     }
+
     public void doNext(int commandNumber) {
 
+    }
+    public void printInputErr() {
+        System.out.print("非法指令，请查证后再输\n");
     }
 
 }
