@@ -67,16 +67,16 @@ public class ParkingBoyTest {
         ParkingLot parkingLot = mock(ParkingLot.class);
         parkingBoy.addParkingLot(parkingLot);
         Car car = new Car(1);
-        Note note = new Note(1);
+        Ticket ticket = new Ticket();
 
-        when(parkingLot.parking(car)).thenReturn(note);
+        when(parkingLot.parking(car)).thenReturn(ticket);
 
-        when(parkingLot.unPark(note)).thenReturn(car);
+        when(parkingLot.unPark(ticket)).thenReturn(car);
 
-        Note note1 = parkingBoy.boyPark(car);
+        Ticket ticket1 = parkingBoy.boyPark(car);
 
 
-        assertEquals(car, parkingBoy.boyUnPark(note1));
+        assertEquals(car, parkingBoy.boyUnPark(ticket1));
     }
 
     @Test
@@ -85,16 +85,18 @@ public class ParkingBoyTest {
         ParkingLot parkingLot = mock(ParkingLot.class);
         parkingBoy.addParkingLot(parkingLot);
         Car car = new Car(1);
-        Note note = new Note(1);
-        when(parkingLot.parking(car)).thenReturn(note);
-        when(parkingLot.unPark(note)).thenReturn(car);
-        note = parkingBoy.boyPark(car);
-        parkingBoy.boyUnPark(note);
-        when(parkingLot.unPark(note)).thenReturn(null);
+        Ticket ticket = new Ticket();
+        when(parkingLot.parking(car)).thenReturn(ticket);
+        when(parkingLot.unPark(ticket)).thenReturn(car);
+        ticket = parkingBoy.boyPark(car);
+        parkingBoy.boyUnPark(ticket);
+        when(parkingLot.unPark(ticket)).thenReturn(null);
         try {
-            parkingBoy.boyUnPark(note);
+            parkingBoy.boyUnPark(ticket);
             fail("should throw the CannotFindTheCarException");
         }catch (CannotFindTheCarException cannotFindTheCarException){
         }
     }
+    
+
 }

@@ -7,15 +7,13 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParkingLotTest {
     @Test
-    public void should_return_note1_when_call_parking_given_input_car1(){
+    public void should_not_throw_exception_when_call_parking_given_input_car1(){
         //given
         ParkingLot parkingLot = new ParkingLot(10);
         Car car1 = new Car(1);
-        Note note1 = new Note(1);
         //when
         try {
-            Note result = parkingLot.parking(car1);
-            assertEquals(note1, result);
+            Ticket result = parkingLot.parking(car1);
         }catch (ParkingLotFullException parkingLotFullExcetion){
             fail("you can't park car when parking lot is full");
         }
@@ -43,10 +41,10 @@ public class ParkingLotTest {
         Car car1 = new Car(1);
         Car car2 = new Car(2);
         Car car3 = new Car(3);
-        Note note1 = parkingLot.parking(car1);
+        Ticket ticket1 = parkingLot.parking(car1);
         parkingLot.parking(car2);
 
-        parkingLot.unPark(note1);
+        parkingLot.unPark(ticket1);
         try{
             parkingLot.parking(car3);
         }catch (ParkingLotFullException parkingLotFullException){
@@ -58,9 +56,9 @@ public class ParkingLotTest {
     public void should_return_car_when_call_unPark_given_input_note_in_parkingLot() {
         ParkingLot parkingLot = new ParkingLot(10);
         Car car1 = new Car(1);
-        Note note1 = parkingLot.parking(car1);
+        Ticket ticket1 = parkingLot.parking(car1);
 
-        Car result = parkingLot.unPark(note1);
+        Car result = parkingLot.unPark(ticket1);
 
         assertEquals(car1, result);
     }
@@ -70,10 +68,10 @@ public class ParkingLotTest {
         ParkingLot parkingLot = new ParkingLot(10);
         Car car1 = new Car(1);
         Car car2 = new Car(2);
-        Note note1 = parkingLot.parking(car1);
-        Note note2 = new Note(car2.getCarid());
+        Ticket ticket1 = parkingLot.parking(car1);
+        Ticket ticket2 = new Ticket();
 
-        Car result = parkingLot.unPark(note2);
+        Car result = parkingLot.unPark(ticket2);
 
         assertEquals(null, result);
     }

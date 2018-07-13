@@ -6,7 +6,7 @@ public class ParkingLot {
     private int size;
 
 //    private HashMap<Locate, Car> parkingSpace
-    private HashMap<Note, Car> parkingCars = new HashMap<>();
+    private HashMap<Ticket, Car> parkingCars = new HashMap<>();
 
     public ParkingLot(int _size) {
         size = _size;
@@ -19,11 +19,11 @@ public class ParkingLot {
         return size - parkingCars.size();
     }
 
-    public Note parking(Car car){
+    public Ticket parking(Car car){
         if(!isFull()){
-            Note note = new Note(car.getCarid());
-            parkingCars.put(note, car);
-            return note;
+            Ticket ticket = new Ticket();
+            parkingCars.put(ticket, car);
+            return ticket;
         }
         else {
             throw new ParkingLotFullException();
@@ -31,11 +31,11 @@ public class ParkingLot {
         }
     }
 
-    public Car unPark(Note note) {
-//        if(parkingCars.containsKey(note))
-//            return parkingCars.get(note);
+    public Car unPark(Ticket ticket) {
+//        if(parkingCars.containsKey(ticket))
+//            return parkingCars.get(ticket);
 //        else return null;
-        return parkingCars.remove(note);
+        return parkingCars.remove(ticket);
     }
 
 

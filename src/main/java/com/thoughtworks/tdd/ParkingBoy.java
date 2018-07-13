@@ -22,28 +22,28 @@ public class ParkingBoy {
         return null;
     }
 
-    public Note boyPark(Car car) {
+    public Ticket boyPark(Car car) {
         ParkingLot parkingLot = getTheFirstNotFullParkingLot();
         if(parkingLot != null){
-            Note note = parkingLot.parking(car);
-           //note.setParkingLot(parkingLot);
-            return note;
+            Ticket ticket = parkingLot.parking(car);
+           //ticket.setParkingLot(parkingLot);
+            return ticket;
         }
         else throw new AllParkingLotFullException();
         //return null;
     }
 
-//    public Car boyUnParkOld(Note note) {
+//    public Car boyUnParkOld(Ticket note) {
 //        ParkingLot parkingLot = note.getParkingLot();
 //        if(parkingLot != null)
 //            return parkingLot.unPark(note);
 //        return null;
 //    }
 
-    public Car boyUnPark(Note note) {
+    public Car boyUnPark(Ticket ticket) {
         Car car = null;
         for(ParkingLot parkingLot: parkingLots){
-            car = parkingLot.unPark(note);
+            car = parkingLot.unPark(ticket);
             if(car != null){
                 break;
             }
