@@ -7,6 +7,14 @@ public class ParkingView {
 
     public void start(){
         showMainUI();
+        int commandNumber = 0;
+        try{
+            commandNumber = getCommandNumber();
+        }catch (InputNotNumberException inputNotNumberException){
+            System.out.print("非法指令，请查证后再输\n");
+            start();
+        }
+        doNext(commandNumber);
     }
 
     public void showMainUI() {
@@ -24,6 +32,9 @@ public class ParkingView {
         if(command != 1 && command != 2)
             throw new InputNotNumberException();
         return command;
+    }
+    public void doNext(int commandNumber) {
+
     }
 
 }

@@ -9,9 +9,12 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class ParkingViewTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -67,7 +70,22 @@ public class ParkingViewTest {
             parkingView.getCommandNumber();
             fail("should catch the exception");
         }catch(InputNotNumberException inputNotNumberException){
-
         }
+    }
+
+    @Test
+    public void should_return_err_UI_when_call_start_input_invalid(){
+    // given
+//        ParkingView parkingView = new ParkingView();
+//        String input = "ad";
+//    // when
+//        System.setIn(new ByteArrayInputStream(input.getBytes()));
+//    // then
+//        parkingView.start();
+//        assertEquals("1.停车\n2.取车\n请输入您要进行的操作：非法指令，请查证后再输\n1.停车\n2.取车\n请输入您要进行的操作：", new String(outContent.toByteArray()));
+
+        ParkingView parkingView = mock(ParkingView.class);
+        when(parkingView.getCommandNumber()).thenThrow(new InputNotNumberException()).thenReturn(1);
+
     }
 }
