@@ -3,11 +3,13 @@ package com.thoughtworks.tdd;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParkingBoy {
+public class ParkingBoy{
     private List<ParkingLot> parkingLots = new ArrayList<>();
 
     public ParkingBoy(){}
-
+    public ParkingBoy(List<ParkingLot> _parkingLots) {
+        parkingLots.addAll(_parkingLots);
+    }
 
     public void addParkingLot(ParkingLot parkingLot) {
         parkingLots.add(parkingLot);
@@ -22,6 +24,14 @@ public class ParkingBoy {
         return null;
     }
 
+    public boolean isAllFull(){
+        for (ParkingLot parkingLot: parkingLots) {
+            if(!parkingLot.isFull()){
+                return false;
+            }
+        }
+        return true;
+    }
     public Ticket boyPark(Car car) {
         ParkingLot parkingLot = getTheFirstNotFullParkingLot();
         if(parkingLot != null){
@@ -33,12 +43,6 @@ public class ParkingBoy {
         //return null;
     }
 
-//    public Car boyUnParkOld(Ticket note) {
-//        ParkingLot parkingLot = note.getParkingLot();
-//        if(parkingLot != null)
-//            return parkingLot.unPark(note);
-//        return null;
-//    }
 
     public Car boyUnPark(Ticket ticket) {
         Car car = null;

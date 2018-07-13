@@ -24,10 +24,18 @@ public class ParkingControl {
     }
 
     private void unpark() {
-
     }
 
     public void park(){
+        boolean canPark = parkingModel.notFull();
+        if(canPark){
+            String carID = parkingView.parkWhenNotFullPrint();
+            Car car = new Car(carID);
+            Ticket ticket = parkingModel.park();
+            start();
+        }else {
+            parkingView.parkWhenFullPrint();
+        }
 
     }
 
