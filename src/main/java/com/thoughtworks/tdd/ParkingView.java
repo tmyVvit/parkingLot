@@ -1,5 +1,6 @@
 package com.thoughtworks.tdd;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ParkingView {
@@ -14,8 +15,14 @@ public class ParkingView {
 
     public int getCommandNumber() {
         Scanner sc = new Scanner(System.in);
-        int command = sc.nextInt();
-
+        int command;
+        try {
+            command = sc.nextInt();
+        }catch (InputMismatchException inputMismatchException){
+            throw new InputNotNumberException();
+        }
+        if(command != 1 && command != 2)
+            throw new InputNotNumberException();
         return command;
     }
 

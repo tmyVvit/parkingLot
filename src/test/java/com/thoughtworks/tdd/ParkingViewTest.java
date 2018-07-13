@@ -10,6 +10,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParkingViewTest {
@@ -54,4 +55,19 @@ public class ParkingViewTest {
         assertEquals(1, result);
     }
 
+    @Test
+    public void should_throw_exception_when_call_getCommandNumber_input_is_not_1_2(){
+    // given
+        ParkingView parkingView = new ParkingView();
+        String input = "abc";
+    // when
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+    // then
+        try {
+            parkingView.getCommandNumber();
+            fail("should catch the exception");
+        }catch(InputNotNumberException inputNotNumberException){
+
+        }
+    }
 }
