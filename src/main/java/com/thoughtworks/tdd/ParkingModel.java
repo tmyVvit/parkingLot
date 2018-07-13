@@ -15,9 +15,13 @@ public class ParkingModel {
        parkingBoy.addParkingLot(new ParkingLot(1));
     }
 
-    public Ticket park(){
-
-        return null;
+    public Ticket park(Car car){
+        try{
+            Ticket ticket = parkingBoy.boyPark(car);
+            return ticket;
+        }catch (AllParkingLotFullException allParkingLotFullException){
+            throw allParkingLotFullException;
+        }
     }
 
     public boolean notFull() {

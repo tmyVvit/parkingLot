@@ -30,13 +30,12 @@ public class ParkingControl {
         boolean canPark = parkingModel.notFull();
         if(canPark){
             String carID = parkingView.parkWhenNotFullPrint();
-            Car car = new Car(carID);
-            Ticket ticket = parkingModel.park();
-            start();
+            Ticket ticket = parkingModel.park(new Car(carID));
+            parkingView.partSuccess(ticket);
         }else {
             parkingView.parkWhenFullPrint();
         }
-
+        start();
     }
 
 }
