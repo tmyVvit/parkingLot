@@ -65,4 +65,17 @@ public class ParkingView {
         System.out.print("停车成功，您的小票是：\n");
         System.out.print(ticket.getUUID());
     }
+
+    public String unPark() {
+        System.out.print("请输入小票编号：");
+        return getInput.get();
+    }
+
+    public void unParkSuccess(Car car) {
+        System.out.print("车已取出，您的车牌号是:"+car.getCarid());
+    }
+
+    public void unParkFail() {
+        System.out.print("非法小票，无法取出车，请查证后再输\n");
+    }
 }

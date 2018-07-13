@@ -16,7 +16,7 @@ public class ParkingBoyTest {
         ParkingLot parkingLot1 = mock(ParkingLot.class);
         parkingBoy.addParkingLot(parkingLot1);
 
-        Car car = new Car(1);
+        Car car = new Car();
         try {
             parkingBoy.boyPark(car);
             verify(parkingLot1).parking(car);
@@ -32,11 +32,11 @@ public class ParkingBoyTest {
         when(parkingLot.isFull()).thenReturn(false, true);
 
         parkingBoy.addParkingLot(parkingLot);
-        parkingBoy.boyPark(new Car(1));
+        parkingBoy.boyPark(new Car());
 
 
         try {
-            parkingBoy.boyPark(new Car(2));
+            parkingBoy.boyPark(new Car());
             fail("should catch the exception");
         }catch (AllParkingLotFullException allParkingLotFullException){
         }
@@ -52,8 +52,8 @@ public class ParkingBoyTest {
         when(firstParkingLot.isFull()).thenReturn(false, true);
         when(secondParkingLot.isFull()).thenReturn(false);
 
-        Car car = new Car(1);
-        Car car2 = new Car(2);
+        Car car = new Car();
+        Car car2 = new Car();
         parkingBoy.boyPark(car);
         parkingBoy.boyPark(car2);
 
@@ -66,7 +66,7 @@ public class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy();
         ParkingLot parkingLot = mock(ParkingLot.class);
         parkingBoy.addParkingLot(parkingLot);
-        Car car = new Car(1);
+        Car car = new Car();
         Ticket ticket = new Ticket();
 
         when(parkingLot.parking(car)).thenReturn(ticket);
@@ -84,7 +84,7 @@ public class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy();
         ParkingLot parkingLot = mock(ParkingLot.class);
         parkingBoy.addParkingLot(parkingLot);
-        Car car = new Car(1);
+        Car car = new Car();
         Ticket ticket = new Ticket();
         when(parkingLot.parking(car)).thenReturn(ticket);
         when(parkingLot.unPark(ticket)).thenReturn(car);

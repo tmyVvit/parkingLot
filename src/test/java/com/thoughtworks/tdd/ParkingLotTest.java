@@ -10,7 +10,7 @@ public class ParkingLotTest {
     public void should_not_throw_exception_when_call_parking_given_input_car1(){
         //given
         ParkingLot parkingLot = new ParkingLot(10);
-        Car car1 = new Car(1);
+        Car car1 = new Car();
         //when
         try {
             Ticket result = parkingLot.parking(car1);
@@ -22,9 +22,9 @@ public class ParkingLotTest {
     @Test
     public void should_throw_ParkingLotFullException_when_call_parking_given_parking_lot_is_full(){
         ParkingLot parkingLot = new ParkingLot(2);
-        Car car1 = new Car(1);
-        Car car2 = new Car(2);
-        Car car3 = new Car(3);
+        Car car1 = new Car("1");
+        Car car2 = new Car("2");
+        Car car3 = new Car("3");
         parkingLot.parking(car1);
         parkingLot.parking(car2);
 
@@ -38,9 +38,9 @@ public class ParkingLotTest {
     @Test
     public void should_park_success_when_a_full_parking_lot_unParked(){
         ParkingLot parkingLot = new ParkingLot(2);
-        Car car1 = new Car(1);
-        Car car2 = new Car(2);
-        Car car3 = new Car(3);
+        Car car1 = new Car("1");
+        Car car2 = new Car("2");
+        Car car3 = new Car("3");
         Ticket ticket1 = parkingLot.parking(car1);
         parkingLot.parking(car2);
 
@@ -55,7 +55,7 @@ public class ParkingLotTest {
     @Test
     public void should_return_car_when_call_unPark_given_input_note_in_parkingLot() {
         ParkingLot parkingLot = new ParkingLot(10);
-        Car car1 = new Car(1);
+        Car car1 = new Car("1");
         Ticket ticket1 = parkingLot.parking(car1);
 
         Car result = parkingLot.unPark(ticket1);
@@ -66,8 +66,8 @@ public class ParkingLotTest {
     @Test
     public void should_return_null_when_call_unPark_given_input_note_not_in_pakingLot() {
         ParkingLot parkingLot = new ParkingLot(10);
-        Car car1 = new Car(1);
-        Car car2 = new Car(2);
+        Car car1 = new Car("1");
+        Car car2 = new Car("2");
         Ticket ticket1 = parkingLot.parking(car1);
         Ticket ticket2 = new Ticket();
 
@@ -80,8 +80,8 @@ public class ParkingLotTest {
     @Test
     public void should_return_emptysize_when_call_left(){
         ParkingLot parkingLot = new ParkingLot(5);
-        Car car1 = new Car(1);
-        Car car2 = new Car(2);
+        Car car1 = new Car("1");
+        Car car2 = new Car("2");
 
         parkingLot.parking(car1);
         parkingLot.parking(car2);

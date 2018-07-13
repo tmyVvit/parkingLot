@@ -1,13 +1,14 @@
 package com.thoughtworks.tdd;
 
 public class Car {
-    private int id;
+    private String  id;
 
-    public Car(int _id) {
+    public Car(){ }
+    public Car(String  _id) {
         id = _id;
     }
 
-    public int getCarid(){
+    public String getCarid(){
         return id;
     }
 

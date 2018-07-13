@@ -122,4 +122,37 @@ public class ParkingViewTest {
         assertEquals("停车成功，您的小票是：\ntest-uuid", outContent.toString());
     }
 
+    @Test
+    public void should_print_input_ticket_id_when_call_unpark(){
+    // given
+        GetInput input = mock(GetInput.class);
+        ParkingView parkingView = new ParkingView(input);
+        when(input.get()).thenReturn("test-uuid");
+    // when
+        parkingView.unPark();
+    // then
+        assertEquals("请输入小票编号：", outContent.toString());
+    }
+    @Test
+    public void should_print_ticket_id_when_call_unParkSuccess(){
+    // given
+        GetInput input = mock(GetInput.class);
+        ParkingView parkingView = new ParkingView(input);
+        Car car = mock(Car.class);
+        when(car.getCarid()).thenReturn("test-car");
+    // when
+        parkingView.unParkSuccess(car);
+    // then
+        assertEquals("车已取出，您的车牌号是:test-car", outContent.toString());
+    }
+    @Test
+    public void should_print_unpark_failed_when_call_unParkFail(){
+    // given
+        GetInput input = mock(GetInput.class);
+        ParkingView parkingView = new ParkingView(input);
+    // when
+        parkingView.unParkFail();
+    // then
+        assertEquals("非法小票，无法取出车，请查证后再输\n", outContent.toString());
+    }
 }
