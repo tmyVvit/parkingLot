@@ -1,5 +1,7 @@
 package com.thoughtworks.tdd;
 
+import java.util.Scanner;
+
 public class ParkingView {
 
     public void start(){
@@ -11,8 +13,10 @@ public class ParkingView {
     }
 
     public int getCommandNumber() {
+        Scanner sc = new Scanner(System.in);
+        int command = sc.nextInt();
 
-        return 1;
+        return command;
     }
 
 }
