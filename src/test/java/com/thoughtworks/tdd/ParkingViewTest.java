@@ -101,6 +101,7 @@ public class ParkingViewTest {
     // then
         assertEquals("车已停满，请晚点再来\n", outContent.toString());
     }
+
     @Test
     public void should_print_input_car_id_when_call_parkWhenNotFullPrint(){
         // given

@@ -41,13 +41,6 @@ public class ParkingView {
         }
     }
 
-    public void doNext(int commandNumber) {
-        if(commandNumber == PARKCOMMAND){
-
-        }else {
-
-        }
-    }
     public void printInputErr() {
         System.out.print("非法指令，请查证后再输\n");
     }
