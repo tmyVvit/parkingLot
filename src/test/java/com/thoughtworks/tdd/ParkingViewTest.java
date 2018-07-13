@@ -1,8 +1,12 @@
 package com.thoughtworks.tdd;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,6 +15,21 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class ParkingViewTest {
+
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+    private final PrintStream originalErr = System.err;
+    @BeforeEach
+    public void init(){
+        System.setOut(new PrintStream(outContent));
+        System.setErr(new PrintStream(errContent));
+    }
+    @AfterEach
+    public void restoreStreams() {
+        System.setOut(originalOut);
+        System.setErr(originalErr);
+    }
 
     @Test
     public void should_get_PARKCOMMAND_when_call_getCommandNumber_given_input_1(){
@@ -72,7 +91,35 @@ public class ParkingViewTest {
             parkingView.start();
         }catch (InputNotValidException inputNotValidException){
         }
-
+    }
+    @Test
+    public void should_print_parking_lot_full_when_call_parkWhenFullPrint(){
+    // given
+        ParkingView parkingView = new ParkingView(mock(GetInput.class));
+    // when
+        parkingView.parkWhenFullPrint();
+    // then
+        assertEquals("车已停满，请晚点再来\n", outContent.toString());
+    }
+    @Test
+    public void should_print_input_car_id_when_call_parkWhenNotFullPrint(){
+        // given
+        ParkingView parkingView = new ParkingView(mock(GetInput.class));
+        // when
+        parkingView.parkWhenNotFullPrint();
+        // then
+        assertEquals("请输入车牌号:", outContent.toString());
+    }
+    @Test
+    public void should_print_park_successful_and_ticket_id_when_call_parkSuccess(){
+        // given
+        ParkingView parkingView = new ParkingView(mock(GetInput.class));
+        Ticket ticket = mock(Ticket.class);
+        when(ticket.getUUID()).thenReturn("test-uuid");
+        // when
+        parkingView.partSuccess(ticket);
+        // then
+        assertEquals("停车成功，您的小票是：\ntest-uuid", outContent.toString());
     }
 
 }

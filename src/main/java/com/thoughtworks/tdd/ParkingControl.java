@@ -12,10 +12,22 @@ public class ParkingControl {
 
     public void start() {
         try {
-            parkingView.start();
+            int commandNumber = parkingView.start();
+            if(commandNumber == 1){
+                park();
+            }else if(commandNumber == 2){
+                unpark();
+            }
         }catch (InputNotValidException inputNotValidException){
             start();
         }
+    }
+
+    private void unpark() {
+
+    }
+
+    public void park(){
 
     }
 

@@ -1,5 +1,7 @@
 package com.thoughtworks.tdd;
 
+import java.util.UUID;
+
 public class ParkingView {
     private GetInput getInput;
     //private
@@ -13,11 +15,11 @@ public class ParkingView {
         getInput = _getInput;
     }
 
-    public void start(){
+    public int start(){
         showMainUI();
         try{
            int commandNumber = getCommandNumber();
-           doNext(commandNumber);
+           return commandNumber;
         }catch (InputNotValidException inputNotValidException){
             printInputErr();
             throw inputNotValidException;
@@ -50,4 +52,17 @@ public class ParkingView {
         System.out.print("非法指令，请查证后再输\n");
     }
 
+    public void parkWhenFullPrint(){
+        System.out.print("车已停满，请晚点再来\n");
+    }
+
+    public String parkWhenNotFullPrint() {
+        System.out.print("请输入车牌号:");
+        return getInput.get();
+    }
+
+    public void partSuccess(Ticket ticket){
+        System.out.print("停车成功，您的小票是：\n");
+        System.out.print(ticket.getUUID());
+    }
 }
