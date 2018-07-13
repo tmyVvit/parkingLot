@@ -17,18 +17,31 @@ public class ParkingViewTest {
     // given
         GetInput input = mock(GetInput.class);
         ParkingView parkingView = new ParkingView(input);
-
+        // when
         when(input.get()).thenReturn("1");
-
-    // when
+        // then
         try{
             int result = parkingView.getCommandNumber();
             assertEquals(1, result);
         }catch (InputNotValidException inputNotValidException){
             fail("should not throw the exception");
         }
-    // then
+    }
 
+    @Test
+    public void should_get_UNPARKCOMMAND_when_call_getCommandNumber_given_input_2(){
+        // given
+        GetInput input = mock(GetInput.class);
+        ParkingView parkingView = new ParkingView(input);
+        // when
+        when(input.get()).thenReturn("2");
+        // then
+        try{
+            int result = parkingView.getCommandNumber();
+            assertEquals(2, result);
+        }catch (InputNotValidException inputNotValidException){
+            fail("should not throw the exception");
+        }
     }
 
 //    @Test
