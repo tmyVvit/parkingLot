@@ -27,12 +27,29 @@ public class ParkingModelTest {
         ParkingModel parkingModel = new ParkingModel(parkingBoy);
         Car car = mock(Car.class);
         when(car.getCarid()).thenReturn("testCar");
+        when(parkingBoy.isAllFull()).thenReturn(false);
     // when
     // then
         try{
-            Ticket ticket = parkingModel.park(car);
+            parkingModel.park(car);
         }catch (AllParkingLotFullException allParkingLotFullException){
             fail("should return the ticket");
+        }
+    }
+    @Test
+    public void should_throw_exceptin_when_call_park_given_parking_lot_full(){
+        // given
+        ParkingBoy parkingBoy = mock(ParkingBoy.class);
+        ParkingModel parkingModel = new ParkingModel(parkingBoy);
+        Car car = mock(Car.class);
+        when(car.getCarid()).thenReturn("testCar");
+        when(parkingBoy.boyPark(car)).thenThrow(new AllParkingLotFullException());
+        // when
+        // then
+        try{
+            parkingModel.park(car);
+            fail("should throw the exception");
+        }catch (AllParkingLotFullException allParkingLotFullException){
         }
     }
 }
