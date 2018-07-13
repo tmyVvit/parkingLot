@@ -29,9 +29,11 @@ public class ParkingBoyTest {
     public void should_park_failed_when_call_boyPark_given_one_parking_lot_is_full(){
         ParkingBoy parkingBoy = new ParkingBoy();
         ParkingLot parkingLot = mock(ParkingLot.class);
+        when(parkingLot.isFull()).thenReturn(false, true);
+
         parkingBoy.addParkingLot(parkingLot);
         parkingBoy.boyPark(new Car(1));
-        when(parkingLot.isFull()).thenReturn(true);
+
 
         try {
             parkingBoy.boyPark(new Car(2));
@@ -47,13 +49,15 @@ public class ParkingBoyTest {
         ParkingLot firstParkingLot = mock(ParkingLot.class);
         parkingBoy.addParkingLot(firstParkingLot);
         parkingBoy.addParkingLot(secondParkingLot);
-        when(firstParkingLot.isFull()).thenReturn(true);
+        when(firstParkingLot.isFull()).thenReturn(false, true);
         when(secondParkingLot.isFull()).thenReturn(false);
 
         Car car = new Car(1);
+        Car car2 = new Car(2);
         parkingBoy.boyPark(car);
+        parkingBoy.boyPark(car2);
 
-        verify(secondParkingLot).parking(car);
+        verify(secondParkingLot).parking(car2);
 
     }
     
@@ -66,6 +70,7 @@ public class ParkingBoyTest {
         Note note = new Note(1);
 
         when(parkingLot.parking(car)).thenReturn(note);
+
         when(parkingLot.unPark(note)).thenReturn(car);
 
         Note note1 = parkingBoy.boyPark(car);
