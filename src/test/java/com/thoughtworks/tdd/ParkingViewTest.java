@@ -44,6 +44,21 @@ public class ParkingViewTest {
         }
     }
 
+    @Test
+    public void should_throw_exception_when_call_getCommandNumber_given_input_invalid(){
+        // given
+        GetInput input = mock(GetInput.class);
+        ParkingView parkingView = new ParkingView(input);
+        // when
+        when(input.get()).thenReturn("abc");
+        // then
+        try{
+            parkingView.getCommandNumber();
+            fail("should not throw the exception");
+        }catch (InputNotValidException inputNotValidException){
+        }
+    }
+
 //    @Test
 //    public void should_get_1_when_call_getCommandNumber_input_1_in_command_line(){
 //    // given
