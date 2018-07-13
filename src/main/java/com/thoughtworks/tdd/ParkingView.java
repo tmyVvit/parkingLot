@@ -15,14 +15,13 @@ public class ParkingView {
 
     public void start(){
         showMainUI();
-        int commandNumber = 0;
         try{
-            commandNumber = getCommandNumber();
+           int commandNumber = getCommandNumber();
+           doNext(commandNumber);
         }catch (InputNotValidException inputNotValidException){
             printInputErr();
-            start();
+            throw inputNotValidException;
         }
-        doNext(commandNumber);
     }
 
     public void showMainUI() {
@@ -41,7 +40,11 @@ public class ParkingView {
     }
 
     public void doNext(int commandNumber) {
+        if(commandNumber == PARKCOMMAND){
 
+        }else {
+
+        }
     }
     public void printInputErr() {
         System.out.print("非法指令，请查证后再输\n");

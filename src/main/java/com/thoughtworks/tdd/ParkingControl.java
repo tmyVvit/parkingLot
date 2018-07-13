@@ -11,7 +11,12 @@ public class ParkingControl {
     }
 
     public void start() {
-        parkingView.start();
+        try {
+            parkingView.start();
+        }catch (InputNotValidException inputNotValidException){
+            start();
+        }
+
     }
 
 }
