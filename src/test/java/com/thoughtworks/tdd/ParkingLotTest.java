@@ -64,16 +64,19 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_return_null_when_call_unPark_given_input_note_not_in_pakingLot() {
+    public void should_throw_exception_when_call_unPark_given_input_note_not_in_pakingLot() {
         ParkingLot parkingLot = new ParkingLot(10);
         Car car1 = new Car("1");
         Car car2 = new Car("2");
         Ticket ticket1 = parkingLot.parking(car1);
         Ticket ticket2 = new Ticket();
 
-        Car result = parkingLot.unPark(ticket2);
+        try {
+            parkingLot.unPark(ticket2);
+            fail("should throw the exception");
+        }catch (CannotFindTheCarException annotFindTheCarException){
 
-        assertEquals(null, result);
+        }
     }
 
 

@@ -27,7 +27,7 @@ public class ParkingModelTest {
         ParkingModel parkingModel = new ParkingModel(parkingBoy);
         Car car = mock(Car.class);
         when(car.getCarid()).thenReturn("testCar");
-        when(parkingBoy.isAllFull()).thenReturn(false);
+        when(parkingBoy.boyPark(car)).thenReturn(mock(Ticket.class));
     // when
     // then
         try{
@@ -60,7 +60,23 @@ public class ParkingModelTest {
         ParkingModel parkingModel = new ParkingModel(parkingBoy);
         Ticket ticket = mock(Ticket.class);
         when(ticket.getUUID()).thenReturn("test-uuid");
+        when(parkingBoy.boyUnPark(ticket)).thenReturn(new Car());
     // when// then
+        try{
+            parkingModel.unPark(ticket);
+        } catch (CannotFindTheCarException cannotFindTheCarException){
+            fail("should get the car instead of throw exception");
+        }
+    }
+
+    @Test
+    public void should_throw_exception_when_call_unPark_given_invalid_ticket(){
+        // given
+        ParkingBoy parkingBoy = mock(ParkingBoy.class);
+        ParkingModel parkingModel = new ParkingModel(parkingBoy);
+        Ticket ticket = mock(Ticket.class);
+        when(ticket.getUUID()).thenReturn("test-uuid");
+        // when// then
         try{
             parkingModel.unPark(ticket);
         } catch (CannotFindTheCarException cannotFindTheCarException){

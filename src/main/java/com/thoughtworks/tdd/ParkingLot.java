@@ -35,7 +35,13 @@ public class ParkingLot {
 //        if(parkingCars.containsKey(ticket))
 //            return parkingCars.get(ticket);
 //        else return null;
-        return parkingCars.remove(ticket);
+        String ticketUUID = ticket.getUUID();
+        for(Ticket t: parkingCars.keySet()){
+            if(t.getUUID().equals(ticketUUID)){
+                return parkingCars.remove(t);
+            }
+        }
+        throw new CannotFindTheCarException();
     }
 
 

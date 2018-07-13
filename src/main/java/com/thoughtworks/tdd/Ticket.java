@@ -9,11 +9,15 @@ public class Ticket {
         uuid = UUID.randomUUID();
     }
     public Ticket(String uuidString){
-        uuid = UUID.fromString(uuidString);
+        try{
+            uuid = UUID.fromString(uuidString);
+        }catch(IllegalArgumentException ilegalArgumentException){}
     }
 
     public String getUUID(){
-        return uuid.toString();
+        if(uuid != null)
+            return uuid.toString();
+        return "not valid uuid";
     }
 
     @Override

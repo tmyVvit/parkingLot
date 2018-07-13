@@ -109,18 +109,18 @@ public class ParkingViewTest {
         // when
         parkingView.parkWhenNotFullPrint();
         // then
-        assertEquals("请输入车牌号:", outContent.toString());
+        assertEquals("请输入车牌号:\n", outContent.toString());
     }
     @Test
     public void should_print_park_successful_and_ticket_id_when_call_parkSuccess(){
         // given
         ParkingView parkingView = new ParkingView(mock(GetInput.class));
         Ticket ticket = mock(Ticket.class);
-        when(ticket.getUUID()).thenReturn("test-uuid");
+        when(ticket.getUUID()).thenReturn("040e701f-8bad-41f4-94b4-23ec1463e8b4");
         // when
         parkingView.partSuccess(ticket);
         // then
-        assertEquals("停车成功，您的小票是：\ntest-uuid", outContent.toString());
+        assertEquals("停车成功，您的小票是：\n040e701f-8bad-41f4-94b4-23ec1463e8b4\n", outContent.toString());
     }
 
     @Test
@@ -128,7 +128,7 @@ public class ParkingViewTest {
     // given
         GetInput input = mock(GetInput.class);
         ParkingView parkingView = new ParkingView(input);
-        when(input.get()).thenReturn("test-uuid");
+        when(input.get()).thenReturn("040e701f-8bad-41f4-94b4-23ec1463e8b4");
     // when
         parkingView.unPark();
     // then
@@ -144,7 +144,7 @@ public class ParkingViewTest {
     // when
         parkingView.unParkSuccess(car);
     // then
-        assertEquals("车已取出，您的车牌号是:test-car", outContent.toString());
+        assertEquals("车已取出，您的车牌号是:test-car\n", outContent.toString());
     }
     @Test
     public void should_print_unpark_failed_when_call_unParkFail(){

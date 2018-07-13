@@ -44,16 +44,13 @@ public class ParkingBoy{
 
 
     public Car boyUnPark(Ticket ticket) {
-        Car car = null;
         for(ParkingLot parkingLot: parkingLots){
-            car = parkingLot.unPark(ticket);
-            if(car != null){
-                break;
+            try{
+                return parkingLot.unPark(ticket);
+            }catch (CannotFindTheCarException cannotFindTheCarException){
+                continue;
             }
         }
-        if(car == null){
-            throw new CannotFindTheCarException();
-        }
-        return car;
+        throw new CannotFindTheCarException();
     }
 }

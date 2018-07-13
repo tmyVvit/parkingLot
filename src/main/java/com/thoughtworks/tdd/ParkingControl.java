@@ -25,7 +25,13 @@ public class ParkingControl {
 
     private void unpark() {
         Ticket ticket = parkingView.unPark();
-        parkingModel.unPark(ticket);
+        try{
+            Car car = parkingModel.unPark(ticket);
+            parkingView.unParkSuccess(car);
+        }catch (CannotFindTheCarException cannotFindTheCarException){
+            parkingView.unParkFail();
+        }
+        start();
     }
 
     public void park(){

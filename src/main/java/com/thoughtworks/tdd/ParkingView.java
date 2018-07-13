@@ -26,7 +26,7 @@ public class ParkingView {
     }
 
     public void showMainUI() {
-        System.out.print("1.停车\n2.取车\n请输入您要进行的操作：");
+        System.out.print("1.停车\n2.取车\n请输入您要进行的操作：\n");
     }
 
     public int getCommandNumber() {
@@ -49,13 +49,13 @@ public class ParkingView {
     }
 
     public String parkWhenNotFullPrint() {
-        System.out.print("请输入车牌号:");
+        System.out.print("请输入车牌号:\n");
         return getInput.get();
     }
 
     public void partSuccess(Ticket ticket){
         System.out.print("停车成功，您的小票是：\n");
-        System.out.print(ticket.getUUID());
+        System.out.print(ticket.getUUID()+"\n");
     }
 
     public Ticket unPark() {
@@ -65,7 +65,7 @@ public class ParkingView {
     }
 
     public void unParkSuccess(Car car) {
-        System.out.print("车已取出，您的车牌号是:"+car.getCarid());
+        System.out.print("车已取出，您的车牌号是:"+car.getCarid()+"\n");
     }
 
     public void unParkFail() {

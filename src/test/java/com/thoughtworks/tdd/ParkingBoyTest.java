@@ -2,6 +2,9 @@ package com.thoughtworks.tdd;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
@@ -44,11 +47,11 @@ public class ParkingBoyTest {
 
     @Test
     public void should_park_to_second_parking_lot_when_call_boyPark_given_first_parking_lot_is_full(){
-        ParkingBoy parkingBoy = new ParkingBoy();
         ParkingLot secondParkingLot = mock(ParkingLot.class);
         ParkingLot firstParkingLot = mock(ParkingLot.class);
-        parkingBoy.addParkingLot(firstParkingLot);
-        parkingBoy.addParkingLot(secondParkingLot);
+        List<ParkingLot> lots = new ArrayList<>();
+        lots.add(firstParkingLot);lots.add(secondParkingLot);
+        ParkingBoy parkingBoy = new ParkingBoy(lots);
         when(firstParkingLot.isFull()).thenReturn(false, true);
         when(secondParkingLot.isFull()).thenReturn(false);
 
@@ -90,13 +93,41 @@ public class ParkingBoyTest {
         when(parkingLot.unPark(ticket)).thenReturn(car);
         ticket = parkingBoy.boyPark(car);
         parkingBoy.boyUnPark(ticket);
-        when(parkingLot.unPark(ticket)).thenReturn(null);
+        when(parkingLot.unPark(ticket)).thenThrow(new CannotFindTheCarException());
         try {
             parkingBoy.boyUnPark(ticket);
             fail("should throw the CannotFindTheCarException");
         }catch (CannotFindTheCarException cannotFindTheCarException){
         }
     }
-    
+
+    @Test
+    public void should_unpark_success_when_unPark_from_second_parking_lot(){
+    // given
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot1 = mock(ParkingLot.class);
+        ParkingLot parkingLot2 = mock(ParkingLot.class);
+        parkingBoy.addParkingLot(parkingLot1);
+        parkingBoy.addParkingLot(parkingLot2);
+
+        when(parkingLot1.isFull()).thenReturn(false, true);
+        when(parkingLot2.isFull()).thenReturn(false, true);
+        Car car1 = mock(Car.class);
+        Car car2 = mock(Car.class);
+        Ticket t1 = mock(Ticket.class);
+        Ticket t2 = mock(Ticket.class);
+
+        when(parkingLot1.parking(car1)).thenReturn(t1);
+        when(parkingLot2.parking(car2)).thenReturn(t2);
+        // when
+    // then
+        try{
+            parkingBoy.boyUnPark(t2);
+        }catch (CannotFindTheCarException cannotFindTheCarException){
+            fail("should unpark successful");
+        }
+
+    }
+
 
 }
