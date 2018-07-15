@@ -1,8 +1,5 @@
 package com.thoughtworks.tdd;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ParkingModel {
     private ParkingBoy parkingBoy;
 
