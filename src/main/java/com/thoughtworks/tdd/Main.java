@@ -6,6 +6,7 @@ public class Main {
     GetInput getInput;
     ParkingControl parkingControl;
 
+    // init with ParkingBoy has 2 parking lot can park 2 cars and 1 car
     public Main(){
         getInput = new GetInput();
         parkingControl = new ParkingControl(new ParkingView(getInput), new ParkingModel());

@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -43,6 +42,41 @@ public class ParkingBoyTest {
             fail("should catch the exception");
         }catch (AllParkingLotFullException allParkingLotFullException){
         }
+    }
+
+    @Test
+    public void should_return_true_when_call_isAllFull_given_two_parking_lot_full(){
+    // given
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot1 = mock(ParkingLot.class);
+        ParkingLot parkingLot2 = mock(ParkingLot.class);
+
+        parkingBoy.addParkingLot(parkingLot1);
+        parkingBoy.addParkingLot(parkingLot2);
+        when(parkingLot1.isFull()).thenReturn(true);
+        when(parkingLot2.isFull()).thenReturn(true);
+
+        // when
+        boolean result = parkingBoy.isAllFull();
+    // then
+        assertTrue(result);
+    }
+    @Test
+    public void should_return_false_when_call_isAllFull_given_two_parking_lot_not_all_full(){
+        // given
+        ParkingBoy parkingBoy = new ParkingBoy();
+        ParkingLot parkingLot1 = mock(ParkingLot.class);
+        ParkingLot parkingLot2 = mock(ParkingLot.class);
+
+        parkingBoy.addParkingLot(parkingLot1);
+        parkingBoy.addParkingLot(parkingLot2);
+        when(parkingLot1.isFull()).thenReturn(true);
+        when(parkingLot2.isFull()).thenReturn(false);
+
+        // when
+        boolean result = parkingBoy.isAllFull();
+        // then
+        assertFalse(result);
     }
 
     @Test
