@@ -15,6 +15,15 @@ public class ParkingBoy{
         parkingLots.add(parkingLot);
     }
 
+    public void addParkingLot(int size, String name) {
+        String id = String.format("%03d", parkingLots.size());
+        parkingLots.add(new ParkingLot(size, name, id));
+    }
+
+    public List<ParkingLot> getParkingLots() {
+        return parkingLots;
+    }
+
     public ParkingLot getTheFirstNotFullParkingLot(){
         for (ParkingLot parkingLot: parkingLots) {
             if(!parkingLot.isFull()){
@@ -52,5 +61,27 @@ public class ParkingBoy{
             }
         }
         throw new CannotFindTheCarException();
+    }
+
+    public int lotsCount() {
+        return parkingLots.size();
+    }
+
+    public int[] parkingLotSize(int i) {
+        int[] space = new int[3];
+        space[0] = parkingLots.get(i).getSize();
+        space[1] = parkingLots.get(i).stopedCarsCounts();
+        space[2] = parkingLots.get(i).lotsLeft();
+        return space;
+    }
+
+    public void delLot(String id) {
+        for(ParkingLot pl: parkingLots){
+            if(pl.getId().equals(id)){
+                if(pl.isEmpty()){
+                    parkingLots.remove(pl);
+                }else throw new ParkingLotNotEmptyException();
+            }
+        }throw new ParkingLotNotExists();
     }
 }

@@ -4,13 +4,22 @@ import java.util.HashMap;
 
 public class ParkingLot {
     private int size;
-
-//    private HashMap<Locate, Car> parkingSpace
+    private String id;
+    private String name;
     private HashMap<Ticket, Car> parkingCars = new HashMap<>();
 
     public ParkingLot(int _size) {
         size = _size;
+        name = String.valueOf(size);
     }
+    public ParkingLot(int _size, String _name, String _id) {
+        size = _size;
+        name = _name;
+        id = _id;
+    }
+
+    public String getName(){return name;}
+    public int getSize(){return size;}
 
     public boolean isFull(){
         return parkingCars.size()>=size;
@@ -27,14 +36,10 @@ public class ParkingLot {
         }
         else {
             throw new ParkingLotFullException();
-//            return null;
         }
     }
 
     public Car unPark(Ticket ticket) {
-//        if(parkingCars.containsKey(ticket))
-//            return parkingCars.get(ticket);
-//        else return null;
         String ticketUUID = ticket.getUUID();
         for(Ticket t: parkingCars.keySet()){
             if(t.getUUID().equals(ticketUUID)){
@@ -45,4 +50,18 @@ public class ParkingLot {
     }
 
 
+    public int lotsLeft() {
+        return size-parkingCars.size();
+    }
+
+    public int stopedCarsCounts() {
+        return parkingCars.size();
+    }
+
+    public String getId() {
+        return id;
+    }
+    public boolean isEmpty(){
+        return parkingCars.size() == 0;
+    }
 }

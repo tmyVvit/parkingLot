@@ -17,7 +17,8 @@ public class Main {
     public static void main(String[] args) {
         Main main = new Main();
         Request request = new Request();
-        Router router = new Router("main", new ParkingModel());
+        ParkingBoy pb = new ParkingBoy();
+        Router router = new Router("base", new ParkingModel(pb));
         while (true) {
 
             router.printPage();
