@@ -10,6 +10,7 @@ import java.util.List;
 
 public class ParkingBoy{
     private List<ParkingLot> parkingLots = new ArrayList<>();
+    private static int parkingNumber = 0;
 
     public ParkingBoy(){}
     public ParkingBoy(List<ParkingLot> _parkingLots) {
@@ -21,7 +22,7 @@ public class ParkingBoy{
     }
 
     public void addParkingLot(int size, String name) {
-        String id = String.format("%03d", parkingLots.size());
+        String id = String.format("%03d", parkingNumber++);
         parkingLots.add(new ParkingLot(size, name, id));
     }
 
@@ -85,6 +86,7 @@ public class ParkingBoy{
             if(pl.getId().equals(id)){
                 if(pl.isEmpty()){
                     parkingLots.remove(pl);
+                    return ;
                 }else throw new ParkingLotNotEmptyException();
             }
         }throw new ParkingLotNotExistsException();

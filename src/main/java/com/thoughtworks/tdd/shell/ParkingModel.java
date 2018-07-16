@@ -46,7 +46,8 @@ public class ParkingModel {
         return parkingBoy.parkingLotSize(i);
     }
 
-    public void delLot(String id) {
+    public Boolean delLot(String id) {
         parkingBoy.delLot(id);
+        return true;
     }
 }

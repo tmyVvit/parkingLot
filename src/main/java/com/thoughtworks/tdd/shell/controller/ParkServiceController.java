@@ -1,6 +1,5 @@
 package com.thoughtworks.tdd.shell.controller;
 
-import com.thoughtworks.tdd.shell.ParkingModel;
 import com.thoughtworks.tdd.shell.Request;
 import com.thoughtworks.tdd.shell.Response;
 
