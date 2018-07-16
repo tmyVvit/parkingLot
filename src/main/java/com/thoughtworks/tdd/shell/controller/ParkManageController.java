@@ -48,7 +48,7 @@ public class ParkManageController extends Controller {
     public String doCheckInfoCommand(Request request) {
         StringBuilder lotsInfo = new StringBuilder("|停车场ID|名称|车位|已停车辆|剩余车位|\n" +
                 "======================================\n");
-        int lotsCount = parkingModel.parkingLotsCount();
+//        int lotsCount = parkingModel.parkingLotsCount();
         int spaceCount = 0, parkedCarCount = 0, lotsLeft = 0;
         List<ParkingLot> parkingLotList = parkingModel.getParkinglots();
         for(ParkingLot pl : parkingLotList){
