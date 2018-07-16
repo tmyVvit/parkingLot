@@ -5,7 +5,6 @@ import com.thoughtworks.tdd.core.Ticket;
 import com.thoughtworks.tdd.shell.ParkingModel;
 import com.thoughtworks.tdd.shell.Request;
 import com.thoughtworks.tdd.shell.Response;
-import com.thoughtworks.tdd.shell.controller.Controller;
 
 public class ParkController extends Controller {
     private ParkingModel parkingModel;
@@ -19,7 +18,6 @@ public class ParkController extends Controller {
 
     @Override
     public void printPage() {
-
     }
 
     public String printPagep() {
