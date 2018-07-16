@@ -15,145 +15,87 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class ParkingViewTest {
-
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-    private final PrintStream originalErr = System.err;
-    @BeforeEach
-    public void init(){
-        System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
-    }
-    @AfterEach
-    public void restoreStreams() {
-        System.setOut(originalOut);
-        System.setErr(originalErr);
-    }
-
     @Test
-    public void should_get_PARKCOMMAND_when_call_getCommandNumber_given_input_1(){
+    public void should_print_main_page_when_call_showMainUI(){
     // given
-        GetInput input = mock(GetInput.class);
-        ParkingView parkingView = new ParkingView(input);
-        // when
-        when(input.get()).thenReturn("1");
-        // then
-        try{
-            int result = parkingView.getCommandNumber();
-            assertEquals(1, result);
-        }catch (InputNotValidException inputNotValidException){
-            fail("should not throw the exception");
-        }
-    }
-
-    @Test
-    public void should_get_UNPARKCOMMAND_when_call_getCommandNumber_given_input_2(){
-        // given
-        GetInput input = mock(GetInput.class);
-        ParkingView parkingView = new ParkingView(input);
-        // when
-        when(input.get()).thenReturn("2");
-        // then
-        try{
-            int result = parkingView.getCommandNumber();
-            assertEquals(2, result);
-        }catch (InputNotValidException inputNotValidException){
-            fail("should not throw the exception");
-        }
-    }
-
-    @Test
-    public void should_throw_exception_when_call_getCommandNumber_given_input_invalid(){
-        // given
-        GetInput input = mock(GetInput.class);
-        ParkingView parkingView = new ParkingView(input);
-        when(input.get()).thenReturn("abc");
-        // when
-        // then
-        try{
-            parkingView.getCommandNumber();
-            fail("should not throw the exception");
-        }catch (InputNotValidException inputNotValidException){
-        }
-    }
-
-    @Test
-    public void should_get_throw_exception_when_call_start_given_invalid_input(){
-    // given
-        GetInput input = mock(GetInput.class);
-        ParkingView parkingView = new ParkingView(input);
-        when(input.get()).thenReturn("abc");
+        ParkingView parkingView = new ParkingView();
     // when
-        // then
-
-        try {
-            parkingView.start();
-        }catch (InputNotValidException inputNotValidException){
-        }
+        String result = parkingView.showMainUI();
+    // then
+        assertEquals("1.停车\n2.取车\n请输入您要进行的操作：\n", result);
     }
+
+    @Test
+    public void should_print_error_when_call_printInputErr(){
+        // given
+        ParkingView parkingView = new ParkingView();
+        // when
+        String result = parkingView.printInputErr();
+        // then
+        assertEquals("非法指令，请查证后再输\n", result);;
+    }
+
     @Test
     public void should_print_parking_lot_full_when_call_parkWhenFullPrint(){
     // given
-        ParkingView parkingView = new ParkingView(mock(GetInput.class));
+        ParkingView parkingView = new ParkingView();
     // when
-        parkingView.parkWhenFullPrint();
+        String result = parkingView.parkWhenFullPrint();
     // then
-        assertEquals("车已停满，请晚点再来\n", outContent.toString());
+        assertEquals("车已停满，请晚点再来\n", result);
     }
 
     @Test
     public void should_print_input_car_id_when_call_parkWhenNotFullPrint(){
         // given
-        ParkingView parkingView = new ParkingView(mock(GetInput.class));
+        ParkingView parkingView = new ParkingView();
         // when
-        parkingView.parkWhenNotFullPrint();
+        String result = parkingView.parkWhenNotFullPrint();
         // then
-        assertEquals("请输入车牌号:\n", outContent.toString());
+        assertEquals("请输入车牌号:\n", result);
     }
+
+
     @Test
     public void should_print_park_successful_and_ticket_id_when_call_parkSuccess(){
         // given
-        ParkingView parkingView = new ParkingView(mock(GetInput.class));
+        ParkingView parkingView = new ParkingView();
         Ticket ticket = mock(Ticket.class);
         when(ticket.getUUID()).thenReturn("040e701f-8bad-41f4-94b4-23ec1463e8b4");
         // when
-        parkingView.partSuccess(ticket);
+        String result = parkingView.partSuccess(ticket);
         // then
-        assertEquals("停车成功，您的小票是：\n040e701f-8bad-41f4-94b4-23ec1463e8b4\n", outContent.toString());
+        assertEquals("停车成功，您的小票是：\n040e701f-8bad-41f4-94b4-23ec1463e8b4\n", result);
     }
 
     @Test
-    public void should_print_input_ticket_id_when_call_unpark(){
+    public void should_print_unPark_info_when_call_unpark(){
     // given
-        GetInput input = mock(GetInput.class);
-        ParkingView parkingView = new ParkingView(input);
-        when(input.get()).thenReturn("040e701f-8bad-41f4-94b4-23ec1463e8b4");
+        ParkingView parkingView = new ParkingView();
     // when
-        parkingView.unPark();
+        String result = parkingView.unPark();
     // then
-        assertEquals("请输入小票编号：", outContent.toString());
+        assertEquals("请输入小票编号：", result );
     }
     @Test
     public void should_print_ticket_id_when_call_unParkSuccess(){
     // given
-        GetInput input = mock(GetInput.class);
-        ParkingView parkingView = new ParkingView(input);
+        ParkingView parkingView = new ParkingView();
         Car car = mock(Car.class);
         when(car.getCarid()).thenReturn("test-car");
     // when
-        parkingView.unParkSuccess(car);
+        String result = parkingView.unParkSuccess(car);
     // then
-        assertEquals("车已取出，您的车牌号是:test-car\n", outContent.toString());
+        assertEquals("车已取出，您的车牌号是:test-car\n", result);
     }
     @Test
     public void should_print_unpark_failed_when_call_unParkFail(){
     // given
-        GetInput input = mock(GetInput.class);
-        ParkingView parkingView = new ParkingView(input);
+
+        ParkingView parkingView = new ParkingView();
     // when
-        parkingView.unParkFail();
+        String result = parkingView.unParkFail();
     // then
-        assertEquals("非法小票，无法取出车，请查证后再输\n", outContent.toString());
+        assertEquals("非法小票，无法取出车，请查证后再输\n", result);
     }
 }

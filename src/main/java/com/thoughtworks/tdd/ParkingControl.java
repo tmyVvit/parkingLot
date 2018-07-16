@@ -4,46 +4,81 @@ public class ParkingControl {
     private final ParkingView parkingView;
     private final ParkingModel parkingModel;
 
+    private Response response;
+    private GetInput getInput;
 
-    public ParkingControl(ParkingView parkingView, ParkingModel parkingModel) {
-        this.parkingView = parkingView;
-        this.parkingModel = parkingModel;
+    private final String PARK = "1";
+    private final String UNPARK = "2";
+    private final int PARKCOMMAND = 1;
+    private final int UNPARKCOMMAND = 2;
+
+
+    public ParkingControl(ParkingView _parkingView, ParkingModel _parkingModel, GetInput _getInput) {
+        parkingView = _parkingView;
+        parkingModel = _parkingModel;
+        getInput = _getInput;
+        response = new Response();
     }
 
-    public void start() {
+//    public void start() {
+//        try {
+//            int commandNumber = parkingView.start();
+//            doCommand(commandNumber);
+//        }catch (InputNotValidException inputNotValidException){
+//        }
+//    }
+
+    public void start(){
+        response.print(parkingView.showMainUI());
         try {
-            int commandNumber = parkingView.start();
-            if(commandNumber == 1){
-                park();
-            }else if(commandNumber == 2){
-                unpark();
-            }
+            int commandNumber = getCommandNumber();
+            doCommand(commandNumber);
         }catch (InputNotValidException inputNotValidException){
-            start();
+            response.print(parkingView.printInputErr());
         }
     }
 
-    private void unpark() {
-        Ticket ticket = parkingView.unPark();
+    private void unPark() {
+        response.print(parkingView.unPark());
+        Ticket ticket = new Ticket(getInput.get());
         try{
             Car car = parkingModel.unPark(ticket);
-            parkingView.unParkSuccess(car);
+            response.print(parkingView.unParkSuccess(car));
         }catch (CannotFindTheCarException cannotFindTheCarException){
-            parkingView.unParkFail();
+            response.print(parkingView.unParkFail());
         }
-        start();
     }
 
     public void park(){
         boolean canPark = parkingModel.notFull();
         if(canPark){
-            String carID = parkingView.parkWhenNotFullPrint();
+            response.print(parkingView.parkWhenNotFullPrint());
+            String carID = getInput.get();
             Ticket ticket = parkingModel.park(new Car(carID));
-            parkingView.partSuccess(ticket);
+            response.print(parkingView.partSuccess(ticket));
         }else {
-            parkingView.parkWhenFullPrint();
+            response.print(parkingView.parkWhenFullPrint());
         }
-        start();
+    }
+
+    public int getCommandNumber() {
+        String input = getInput.get();
+        if(input.equals(PARK)){
+            return PARKCOMMAND;
+        } else if(input.equals(UNPARK)){
+            return UNPARKCOMMAND;
+        } else {
+            throw new InputNotValidException();
+        }
+    }
+
+    public void doCommand(int command) {
+        switch (command){
+            case PARKCOMMAND:
+                park();break;
+            case UNPARKCOMMAND:
+                unPark();break;
+        }
     }
 
 }

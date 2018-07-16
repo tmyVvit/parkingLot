@@ -3,7 +3,6 @@ package com.thoughtworks.tdd;
 import java.util.UUID;
 
 public class ParkingView {
-    private GetInput getInput;
     //private
     private final String PARK = "1";
     private final String UNPARK = "2";
@@ -11,64 +10,39 @@ public class ParkingView {
     private final int UNPARKCOMMAND = 2;
 
 
-    public ParkingView(GetInput _getInput) {
-        getInput = _getInput;
+    public ParkingView() {
     }
 
-    public int start(){
-        showMainUI();
-        try{
-            return getCommandNumber();
-        }catch (InputNotValidException inputNotValidException){
-            printInputErr();
-            throw inputNotValidException;
-        }
+    public String showMainUI() {
+        return "1.停车\n2.取车\n请输入您要进行的操作：\n";
+
     }
 
-    public void showMainUI() {
-        System.out.print("1.停车\n2.取车\n请输入您要进行的操作：\n");
+    public String printInputErr() {
+        return "非法指令，请查证后再输\n";
     }
 
-    public int getCommandNumber() {
-        String input = getInput.get();
-        if(input.equals(PARK)){
-            return PARKCOMMAND;
-        } else if(input.equals(UNPARK)){
-            return UNPARKCOMMAND;
-        } else {
-            throw new InputNotValidException();
-        }
-    }
-
-    public void printInputErr() {
-        System.out.print("非法指令，请查证后再输\n");
-    }
-
-    public void parkWhenFullPrint(){
-        System.out.print("车已停满，请晚点再来\n");
+    public String parkWhenFullPrint(){
+        return "车已停满，请晚点再来\n";
     }
 
     public String parkWhenNotFullPrint() {
-        System.out.print("请输入车牌号:\n");
-        return getInput.get();
+        return "请输入车牌号:\n";
     }
 
-    public void partSuccess(Ticket ticket){
-        System.out.print("停车成功，您的小票是：\n");
-        System.out.print(ticket.getUUID()+"\n");
+    public String partSuccess(Ticket ticket){
+        return "停车成功，您的小票是：\n"+ticket.getUUID()+"\n";
     }
 
-    public Ticket unPark() {
-        System.out.print("请输入小票编号：");
-
-        return new Ticket(getInput.get());
+    public String unPark() {
+        return "请输入小票编号：";
     }
 
-    public void unParkSuccess(Car car) {
-        System.out.print("车已取出，您的车牌号是:"+car.getCarid()+"\n");
+    public String unParkSuccess(Car car) {
+        return "车已取出，您的车牌号是:"+car.getCarid()+"\n";
     }
 
-    public void unParkFail() {
-        System.out.print("非法小票，无法取出车，请查证后再输\n");
+    public String unParkFail() {
+        return "非法小票，无法取出车，请查证后再输\n";
     }
 }
