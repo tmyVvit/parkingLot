@@ -1,21 +1,11 @@
 package com.thoughtworks.tdd;
 
-import java.util.UUID;
-
 public class ParkingView {
-    //private
-    private final String PARK = "1";
-    private final String UNPARK = "2";
-    private final int PARKCOMMAND = 1;
-    private final int UNPARKCOMMAND = 2;
 
-
-    public ParkingView() {
-    }
+    public ParkingView() { }
 
     public String showMainUI() {
         return "1.停车\n2.取车\n请输入您要进行的操作：\n";
-
     }
 
     public String printInputErr() {
@@ -35,7 +25,7 @@ public class ParkingView {
     }
 
     public String unPark() {
-        return "请输入小票编号：";
+        return "请输入小票编号：\n";
     }
 
     public String unParkSuccess(Car car) {

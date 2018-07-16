@@ -75,7 +75,7 @@ public class ParkingViewTest {
     // when
         String result = parkingView.unPark();
     // then
-        assertEquals("请输入小票编号：", result );
+        assertEquals("请输入小票编号：\n", result );
     }
     @Test
     public void should_print_ticket_id_when_call_unParkSuccess(){
