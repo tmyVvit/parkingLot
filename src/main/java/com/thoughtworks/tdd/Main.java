@@ -1,6 +1,7 @@
 package com.thoughtworks.tdd;
 
-import java.util.Map;
+import com.thoughtworks.tdd.core.ParkingBoy;
+import com.thoughtworks.tdd.shell.*;
 
 public class Main {
     GetInput getInput;
@@ -18,15 +19,12 @@ public class Main {
         Main main = new Main();
         Request request = new Request();
         ParkingBoy pb = new ParkingBoy();
-        Router router = new Router("base", new ParkingModel(pb));
+        Router router = new Router(new ParkingModel(pb));
+        router.init();
         while (true) {
-
-            router.printPage();
             String command = main.getInput.get();
             request.setCommand(command);
-            router.doCommand(request);
-
-
+            router.start(request);
         }
     }
 
