@@ -18,24 +18,25 @@ public class ParkManageController extends Controller {
 
     @Override
     public String doCommand(Request request) {
-        String command = request.getCommand();
-        String currentPage = BASE;
-        switch (command) {
-            case "1":
-                doCheckInfoCommand(request);
-//                currentPage = CHECKLOTINFO;
-                break;
-            case "2":
-                currentPage = ADDLOT;
-                break;
-            case "3":
-                currentPage = DELLOT;
-                break;
-            default:
-                response.print("非法指令，请查证后再输\n");
-                break;
-        }
-        return currentPage;
+        printPage();
+//        String command = request.getCommand();
+//        String currentPage = BASE;
+//        switch (command) {
+//            case "1":
+//                doCheckInfoCommand(request);
+////                currentPage = CHECKLOTINFO;
+//                break;
+//            case "2":
+//                currentPage = ADDLOT;
+//                break;
+//            case "3":
+//                currentPage = DELLOT;
+//                break;
+//            default:
+//                response.print("非法指令，请查证后再输\n");
+//                break;
+//        }
+        return "";
     }
 
     @Override

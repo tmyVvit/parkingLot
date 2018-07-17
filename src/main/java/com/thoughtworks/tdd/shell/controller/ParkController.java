@@ -23,10 +23,10 @@ public class ParkController extends Controller {
     public String printPagep() {
         if(parkingModel.notFull()) {
             response.print("请输入车牌号:\n");
-            return "park";
+            return "";
         }else {
             response.print("车已停满，请晚点再来\n");
-            return "base";
+            return "forwards:base";
         }
     }
 
@@ -36,6 +36,6 @@ public class ParkController extends Controller {
         Ticket ticket = parkingModel.park(car);
         response.print("停车成功，您的小票是：\n"+ticket.getUUID()+"\n");
 
-        return BASE;
+        return "forwards:base";
     }
 }

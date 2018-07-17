@@ -11,20 +11,22 @@ public class BaseController extends Controller {
     }
     @Override
     public String doCommand(Request request) {
-        String command = request.getCommand();
-        String currentPage = BASE;
-        switch (command) {
-            case "1":
-                currentPage = PARKSERVICE;
-                break;
-            case "2":
-                currentPage = PARKMANAGE;
-                break;
-            default:
-                response.print("非法指令，请查证后再输\n");
-                break;
-        }
-        return currentPage;
+        printPage();
+//        String command = request.getCommand();
+//        String currentPage = BASE;
+//        switch (command) {
+//            case "1":
+//                currentPage = PARKSERVICE;
+//                break;
+//            case "2":
+//                currentPage = PARKMANAGE;
+//                break;
+//            default:
+//                response.print("非法指令，请查证后再输\n");
+//                break;
+//        }
+//        return currentPage;
+        return "";
     }
 
     public void printPage() {

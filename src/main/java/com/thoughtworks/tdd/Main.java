@@ -22,9 +22,14 @@ public class Main {
         Router router = new Router(new ParkingModel(pb));
         router.init();
         while (true) {
-            String command = main.getInput.get();
-            request.setCommand(command);
-            router.start(request);
+            try{
+                String command = main.getInput.get();
+                request.setCommand(command);
+                router.startNew(request);
+            }catch (Exception ex){
+                router.printErr();
+                router.init();
+            }
         }
     }
 

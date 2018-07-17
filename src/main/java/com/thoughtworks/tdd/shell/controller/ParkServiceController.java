@@ -12,20 +12,22 @@ public class ParkServiceController extends Controller {
 
     @Override
     public String doCommand(Request request) {
-        String command = request.getCommand();
-        String currentPage = BASE;
-        switch (command) {
-            case "1":
-                currentPage = PARK;
-                break;
-            case "2":
-                currentPage = UNPARK;
-                break;
-            default:
-                response.print("非法指令，请查证后再输\n");
-                break;
-        }
-        return currentPage;
+        printPage();
+        return "";
+//        String command = request.getCommand();
+//        String currentPage = BASE;
+//        switch (command) {
+//            case "1":
+//                currentPage = PARK;
+//                break;
+//            case "2":
+//                currentPage = UNPARK;
+//                break;
+//            default:
+//                response.print("非法指令，请查证后再输\n");
+//                break;
+//        }
+//        return currentPage;
     }
 
     @Override

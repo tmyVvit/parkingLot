@@ -30,6 +30,6 @@ public class UnParkController extends Controller {
         } catch (CannotFindTheCarException cannotFindTheCarException) {
             response.print("非法小票，无法取出车，请查证后再输\n");
         }
-        return BASE;
+        return "forwards:base";
     }
 }
