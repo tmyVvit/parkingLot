@@ -30,6 +30,6 @@ public class ParkMAddLotController extends Controller {
             response.print("非法指令，请查证后再输\n");
         }
 
-        return BASE;
+        return "forwards:base";
     }
 }

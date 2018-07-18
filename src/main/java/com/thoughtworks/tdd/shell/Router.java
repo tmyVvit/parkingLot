@@ -1,6 +1,5 @@
 package com.thoughtworks.tdd.shell;
 
-import com.sun.org.apache.regexp.internal.REUtil;
 import com.thoughtworks.tdd.shell.controller.*;
 
 import java.util.HashMap;
@@ -39,7 +38,12 @@ public class Router {
         regist("base/service/2", new TryUnParkController(response));
         regist("base/service/2/*", new UnParkController(response, parkingModel));
         regist("base/manage", new ParkManageController(response, parkingModel));
-        regist("base", new BaseController(response));
+        regist("base/manage/1", new CheckInfoCommand(response, parkingModel));
+        regist("base/manage/2", new TryParkMAddLotController(response));
+        regist("base/manage/2/*", new ParkMAddLotController(response,parkingModel));
+        regist("base/manage/3", new TryParkMDelLotController(response));
+        regist("base/manage/3/*", new ParkMDelLotController(response,parkingModel));
+
         regist("err", new ErrController(response));
 
     }

@@ -32,6 +32,6 @@ public class ParkMDelLotController extends Controller {
             response.print("停车场添加失败，原因：此停车场中，依然停有汽车，无法删除！\n");
         }
 
-        return BASE;
+        return "forwards:base";
     }
 }
